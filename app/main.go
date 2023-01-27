@@ -67,7 +67,7 @@ var (
 		[]string{"code", "method"},
 	)
 
-	version = "v1"
+	version = os.Getenv("VERSION")
 )
 
 func init() {
@@ -165,5 +165,5 @@ func httpHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	fmt.Fprintf(w, "Hello World from %s", hostname)
+	fmt.Fprintf(w, "Host: %s, Version: %s\n", hostname, version)
 }
