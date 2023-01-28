@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: redis-configuration
+  namespace: demo
+  labels:
+    app: redis
+data:
+  master.conf: |
+    maxmemory 400mb
+    timeout 300
+    appendonly yes
+    dir /data
+  slave.conf: |
+    replicaof redis-0.redis-headless.demo.svc.cluster.local 6379
+    maxmemory 400mb
+    timeout 300
+    dir /data
