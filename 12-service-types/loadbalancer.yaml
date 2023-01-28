@@ -1,0 +1,14 @@
+#this will not work with minikube since there is no LoadBalancer integrated
+apiVersion: v1
+kind: Service
+metadata:
+  name: demo-app-lb
+  namespace: demo
+spec:
+  type: LoadBalancer
+  selector:
+    app: demoapp
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: http
