@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: redis-single
+  namespace: demo
+spec:
+  serviceName: redis-headless
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis-single
+  template:
+    metadata:
+      labels:
+        app: redis-single
+    spec:
+      containers:
+      - name: redis
+        image: redis:latest
+        ports:
+        - containerPort: 6379
+          name: redis
+        command:
+          - redis-server
+          - "/etc/redis/redis.conf"
+        volumeMounts:
+        - name: redis-data
+          mountPath: /data
+        - name: config-map
+          mountPath: /etc/redis
+      volumes:
+      - name: config-map
+        configMap:
+          name: redis-single-configuration                  
+  volumeClaimTemplates:
+  - metadata:
+      name: redis-data
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 1Gi

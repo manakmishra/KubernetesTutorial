@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: redis-single-configuration
+  namespace: demo
+  labels:
+    app: redis-single
+data:
+  redis.conf: |
+    maxmemory 400mb
+    timeout 300
+    appendonly yes
+    dir /data
