@@ -5,6 +5,7 @@ metadata:
   namespace: demo
   labels:
     app: utils-app
+    demo: argocd
 spec:
   containers:
   - name: utils
