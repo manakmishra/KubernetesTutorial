@@ -30,8 +30,8 @@ spec:
         - name: WORDPRESS_DB_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: mysql
-              key: mysql-root-password
+              name: mysql-pass
+              key: password
         ports:
         - containerPort: 80
           name: wordpress
